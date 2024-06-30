@@ -10,6 +10,7 @@ const ForgotPassword = () => {
     event.preventDefault();
     
     try {
+<<<<<<< HEAD
       const response = await fetch("/send-reset-email", {
         method: 'POST',
         headers: {
@@ -19,6 +20,10 @@ const ForgotPassword = () => {
       });
       const data = await response.json();
       alert(data.message);
+=======
+      const response = await axios.post('https://vercel-deploy-backend.vercel.app/forgotpassword/send-reset-email', { email });
+      setMessage(response.data.message);
+>>>>>>> 1632af1bad4ec5db0f73999d6ab217bb7d267f0e
     } catch (error) {
       console.error('Error:', error);
     }
