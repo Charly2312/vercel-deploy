@@ -1,47 +1,39 @@
-// src/pages/ForgotPassword.jsx
-import React, { useState } from "react";
-import "./ForgotPassword.css";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleResetPassword = async (event) => {
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await fetch("/send-reset-email", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: email })
-      });
-      const data = await response.json();
-      alert(data.message);
+      const response = await axios.post('https://vercel-deploy-backend.vercel.app/send-reset-email', { email });
+      setMessage(response.data.message);
     } catch (error) {
-      console.error('Error:', error);
+      setMessage('Failed to send reset email');
+      console.error('There was an error!', error);
     }
   };
 
   return (
-    <div className="reset-container">
-      <h1>Reset Your Password</h1>
-      <p>
-        Please enter your email address to receive a link to create a new
-        password via email.
-      </p>
-      <form className="reset-form" onSubmit={handleResetPassword}>
+    <div>
+      <h2>Forgot Password</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
+          placeholder="Enter your email"
           required
         />
-        <button type="submit">Send Reset Link</button>
+        <button type="submit">Send Reset Email</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };
