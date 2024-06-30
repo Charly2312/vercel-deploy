@@ -15,7 +15,12 @@ const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
 const app = express();
 const PORT = 5000; //react by default uses port 3000. DONT put 3000 here!
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://vercel-prototype-server.vercel.app"],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
