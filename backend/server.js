@@ -16,7 +16,7 @@ const app = express();
 const PORT = 5000; //react by default uses port 3000. DONT put 3000 here!
 
 app.use(cors({
-  origin: ["https://vercel-deploy-frontend-zeta.vercel.app/forgotpassword"],
+  origin: ["https://vercel-deploy-frontend-zeta.vercel.app"],
   methods: ["POST", "GET"],
   credentials: true
 }));
