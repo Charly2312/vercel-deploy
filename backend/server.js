@@ -52,7 +52,7 @@ app.post('/send-reset-email', async (req, res) => {
       //from:'ontrack@support.com',
       to: email,
       subject: 'Reset password link',
-      html: '<p>Press the link to reset your password: <link>http://localhost:3000/newpassword</link>!</p>'
+      html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-zeta.vercel.app/newpassword</link>!</p>'
     });
     console.log('Reset password email sent:', data);
     res.json({ message: "Reset email sent successfully" });
