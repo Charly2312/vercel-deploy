@@ -1,0 +1,50 @@
+.to-do-list-wrapper,
+.event-reminder {
+  width: 90%; /* Use full available width */
+}
+
+.tdl-wrapper {
+  max-width: 450px;
+  width: 400px;
+  height: 200px;
+  background-color: #efe8d8; /* Soft gray background for aesthetic appeal */
+  padding: 20px; /* Padding around the content */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 30px; /* External margin for separation from other content */
+}
+
+.tdl-container {
+  text-decoration: none; /* Removes underline from links */
+  display: block; /* Makes the entire area clickable */
+  color: #333; /* Text color */
+}
+
+.tdl-day-section {
+  list-style: none; /* Removes default list styling */
+  padding: 0; /* Removes default padding */
+  margin: 0; /* Aligns with design requirements */
+}
+
+.tdl-day-section li {
+  display: flex;
+  align-items: center; /* Centers items vertically */
+  margin-bottom: 5px; /* Space between items */
+  font-size: 16px; /* Text size */
+}
+
+.tdl-day-section li::before {
+  content: ""; /* Creates the circle */
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-color: #123c69; /* Green circle */
+  border-radius: 50%; /* Makes the circle round */
+  margin-right: 10px; /* Space between circle and text */
+}
+
+.tdl-day-section li span {
+  flex-grow: 1; /* Takes up remaining space */
+  border-bottom: 1px dotted #ccc; /* Dotted line under the text */
+  padding-bottom: 2px; /* Padding to lift text off the line slightly */
+}

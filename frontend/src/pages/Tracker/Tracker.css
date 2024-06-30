@@ -1,0 +1,115 @@
+/* Tracker.css */
+
+.tracker-container {
+  display: flex;
+  height: 100vh;
+  width:100%;
+  overflow: hidden;
+}
+
+.tracker-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #eeeadf;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 20px;
+  overflow: auto;
+}
+
+.tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tracker-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.chart-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  flex: 1;
+  max-width: 45%;
+  padding: 10px;
+}
+
+.stats-container {
+  flex: 1;
+  max-width: 45%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e4d1b9; /* Warm Sand */
+  border-radius: 10px;
+  background-color: #f7f3e8; /* Off-White */
+  margin-left: 20px;
+}
+
+.bar-chart-container {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f7f3e8; /* Off-White */
+  border: 1px solid #e4d1b9; /* Warm Sand */
+  border-radius: 20px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for aesthetic look */
+}
+
+.filter-container select {
+  background-color: #faf3dd; /* Light Beige */
+  border: 1px solid #e4d1b9; /* Warm Sand */
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #2e2d2d; /* Dark Slate */
+}
+
+.filter-container label {
+  font-size: 14px;
+  color: #2e2d2d; /* Dark Slate */
+}
+
+footer {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .chart-section {
+    flex-direction: column;
+  }
+
+  .chart-container,
+  .stats-container {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}

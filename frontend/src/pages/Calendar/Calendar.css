@@ -1,0 +1,102 @@
+/* Calendar.css */
+.calendar-container {
+  display: flex;
+  height: 100vh; /*ensures the container takes the full height of the viewport*/
+  width: 100vw;
+}
+
+.calendar-main {
+  display: flex;
+  flex-grow: 1;
+  overflow: auto;
+  padding: 20px;
+  background-color: #f9f3e2;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  box-sizing: border-box;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.modal-content label,
+.modal-content input,
+.modal-content textarea {
+  margin-bottom: 10px;
+}
+
+.modal-content .close {
+  align-self: flex-end;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+button {
+  background-color: #3788d8;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.hover-popup {
+  position: absolute;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.fc {
+  flex-grow: 1; /* Ensure FullCalendar component takes full height */
+  width: 100%;
+}
+
+.fc .fc-toolbar {
+  margin-bottom: 20px;
+}
+
+.fc .fc-view {
+  height: calc(100% - 40px); /* Adjust for toolbar height */
+}
+
+.sidebar {
+  width: 250px; /* Sets the width of the sidebar */
+  flex-shrink: 0; /* Prevents the sidebar from shrinking */
+  background-color: #000000; /* Sets the background color of the sidebar */
+  color: white; /* Sets the text color inside the sidebar */
+  padding: 20px; /* Adds padding inside the sidebar */
+  height: 100vh; /* Sets the height to be 100% of the viewport height */
+  box-sizing: border-box; /* Ensures padding and border are included in the total width and height */
+  position: fixed; /* Fixes the sidebar to the left of the viewport */
+  top: 0; /* Positions the sidebar at the top */
+  left: 0; /* Positions the sidebar at the left */
+  overflow-y: auto; /* Adds vertical scrolling if content overflows */
+}

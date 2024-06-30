@@ -1,0 +1,103 @@
+.timetable-container {
+  display: flex;
+}
+
+.timetable-main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link-buttons button {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.link-icon {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+}
+
+.timetable-wrapper {
+  overflow-x: auto; /* Add horizontal scrolling */
+  overflow-y: auto; /* Add vertical scrolling */
+  max-height: 600px; /* Adjust the height as per your design */
+  position: relative; /* Ensure relative positioning */
+}
+
+.timetable {
+  display: flex;
+  position: relative; /* Ensure relative positioning */
+}
+
+.time-column {
+  width: 60px;
+  text-align: center;
+  background-color: #f9f9f9;
+  z-index: 1;
+  flex-shrink: 0;
+  position: sticky;
+  left: 0;
+  top: 0; /* Add this line to make the time column sticky at the top */
+}
+
+.time {
+  height: 60px;
+  line-height: 60px;
+  border-bottom: 1px solid #ccc;
+}
+
+.daily-column {
+  flex-grow: 1;
+  border-left: 1px solid #ccc;
+  position: relative;
+}
+
+.daily-header {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 2; /* Ensure it appears above the timings */
+}
+
+.time-slot {
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+}

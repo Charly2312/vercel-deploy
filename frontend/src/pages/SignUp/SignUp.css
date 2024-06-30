@@ -1,0 +1,124 @@
+/* src/pages/SignUp.css */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    to top,
+    #edc7b7 0%,
+    #edc7b7 50%,
+    #eee2dc 50%,
+    #eee2dc 100%
+  );
+}
+
+.signup-container {
+  width: 90%;
+  max-width: 320px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2,
+p {
+  margin: 0 0 20px 0;
+}
+
+.social-button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.social-button img {
+  height: 24px;
+  width: auto;
+  margin-right: 12px;
+}
+
+.google {
+  background-color: #db4437;
+}
+.facebook {
+  background-color: #3b5998;
+}
+.apple {
+  background-color: #a2aaad;
+}
+
+.social-button.google img {
+  margin-top: -1px;
+  margin-right: 14px;
+}
+.social-button.facebook img {
+  margin-top: -1px;
+  margin-right: 12px;
+  margin-left: -9px;
+}
+.social-button.apple img {
+  margin-top: -2px;
+  margin-right: 10px;
+  margin-left: 2px;
+}
+
+.social-button span {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.divider {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"],
+.signup-form input[type="date"] {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.signup-form button {
+  width: 90%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-form button:hover {
+  background-color: #0056b3;
+}
+
+.ady {
+  font-size: 15px;
+}

@@ -1,0 +1,73 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: transparent;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic-label {
+  cursor: pointer;
+}
+
+.profile-pic,
+.default-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd;
+  margin-right: 10px;
+}
+
+.profile-pic {
+  object-fit: cover;
+}
+
+.default-profile-pic {
+  font-size: 24px;
+  color: #777;
+}
+
+.search-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.search-bar {
+  flex-grow: 1;
+  height: 45px; /* Adjust height to align with search bar */
+  margin-left: 150px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  outline: none;
+  margin-right: 10px;
+}
+
+.search-bar:focus {
+  border-color: #666;
+}
+
+.search-button {
+  padding: 10px 20px;
+  max-width: 200px;
+  background-color: #123c69;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin-left: 10px;
+  height: 45px; /* Adjust height to align with search bar */
+}
