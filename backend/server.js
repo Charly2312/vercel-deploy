@@ -25,6 +25,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Testing, Hello World!');
+  res.json('Testing, Hello World!');
 });
 
 //for forgot password
