@@ -43,7 +43,7 @@ app.post('/send-reset-email', async (req, res) => {
 
   const { data, error } = await supabase
         .from('users')
-        .select()
+        .select('id')
         .eq('email', email)
         .maybeSingle();
   
