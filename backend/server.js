@@ -15,12 +15,7 @@ const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
 const app = express();
 const PORT = 5000; //react by default uses port 3000. DONT put 3000 here!
 
-app.use(cors({
-  origin: ["https://vercel-deploy-frontend-tau.vercel.app/forgotpassword"],
-  methods: ["POST", "GET"],
-  credentials: true
-}));
-
+//frontend url
 app.use(cors({
   origin: ["https://vercel-deploy-frontend-tau.vercel.app"],
   methods: ["POST", "GET"],
@@ -58,7 +53,7 @@ app.post('/send-reset-email', async (req, res) => {
       //from:'ontrack@support.com',
       to: email,
       subject: 'Reset password link',
-      html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-zeta.vercel.app/newpassword</link>!</p>'
+      html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'
     });
     console.log('Reset password email sent:', data);
     res.json({ message: "Reset email sent successfully" });
