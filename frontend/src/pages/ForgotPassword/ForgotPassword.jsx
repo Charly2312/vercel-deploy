@@ -6,6 +6,8 @@ import axios from "axios";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
 
+  console.log(email);
+
   const handleResetPassword = async (event) => {
     event.preventDefault();
     axios.post("https://vercel-deploy-frontend-tau.vercel.app/send-reset-email", {email})

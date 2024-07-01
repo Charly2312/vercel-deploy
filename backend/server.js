@@ -42,10 +42,10 @@ app.post('/send-reset-email', async (req, res) => {
   console.log('Received data:', req.body);
 
   const { data, error } = await supabase
-        .from('users')
-        .select('id')
-        .eq('email', email)
-        .maybeSingle();
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .maybeSingle()
   
   console.log('Fetched user data:', data);
 
