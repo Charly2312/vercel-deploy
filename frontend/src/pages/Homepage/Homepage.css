@@ -1,7 +1,7 @@
 .App {
   display: flex;
   height: 100vh;
-  width: 100%; /* Ensure the app fills the whole viewport */
+  width: 80vw; /* Ensure the app fills the whole viewport */
 }
 
 .main-content {

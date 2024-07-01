@@ -2,7 +2,8 @@
 .calendar-container {
   display: flex;
   height: 100vh; /*ensures the container takes the full height of the viewport*/
-  width: 100vw;
+  width: 80vw;
+  margin-left: 250px;
 }
 
 .calendar-main {
@@ -10,7 +11,7 @@
   flex-grow: 1;
   overflow: auto;
   padding: 20px;
-  background-color: #f9f3e2;
+  background-color: #fdfaf6;
   display: flex;
   flex-direction: column;
   /*justify-content: center;*/
@@ -69,9 +70,14 @@ button {
 
 .hover-popup {
   position: absolute;
-  border: 1px solid #ccc;
-  padding: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  bottom: 0; /* Positions the popup at the bottom */
+  left: 0; /* Aligns the popup to the left */
+  background-color: white; /* Sets the background color to white */
+  border: 1px solid #ccc; /* Adds a light grey border */
+  padding: 10px; /* Adds 10px padding inside the popup */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adds a shadow for a lifted effect */
+  z-index: 1001; /* Ensures it appears above other elements */
+  margin-left: 250px;
 }
 
 .fc {

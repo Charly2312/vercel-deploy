@@ -4,25 +4,25 @@ body {
   background-color: #f5f5f5;
   margin: 0;
   padding: 0;
-  height: 100%;
-  display: flex;
 }
 
-/* Container for Sidebar and ToDoList */
 .todo-list-container {
   display: flex;
-  width: 100%;
   height: 100vh;
+  overflow: hidden;
+  margin-left: 250px;
 }
 
 .todo-list-main {
   flex-grow: 1;
   padding: 20px;
-  overflow-y: auto;
+  overflow: auto;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -59,12 +59,14 @@ header h1 {
 }
 
 .day-section {
-  flex: 1 1 calc(33% - 20px);
+  flex: 1 1 calc(33.333% - 20px); /* Ensure three columns layout with equal spacing */
   background-color: #efe8d8;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .day-section h2 {
@@ -83,6 +85,7 @@ header h1 {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
 }
 
 .day-section ul li {

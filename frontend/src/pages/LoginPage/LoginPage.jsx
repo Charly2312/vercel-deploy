@@ -45,7 +45,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="logincontainer">
+    <div className="container">
       <div className="info-section">
         <Clock />
         <p>Stay Ahead, Stay OnTrack.</p>

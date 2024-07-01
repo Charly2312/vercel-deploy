@@ -1,10 +1,9 @@
-/* Tracker.css */
-
 .tracker-container {
   display: flex;
-  height: 100vh;
-  width:100%;
+  height: 105vh;
+  width: 83vw; /* Use full width for a balanced layout */
   overflow: hidden;
+  margin-left: 250px;
 }
 
 .tracker-main {
@@ -12,11 +11,11 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #eeeadf;
+  background-color: #fdfaf6;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin: 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .tracker-header {
@@ -26,73 +25,108 @@
   margin-bottom: 20px;
 }
 
+.link-buttons button {
+  background-color: #fff;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.link-buttons button:hover {
+  background-color: #ccc;
+}
+
 .tracker-content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
   align-items: center;
+  flex-grow: 1;
   overflow-y: auto;
 }
 
 .chart-section {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around; /* Adjust spacing for better alignment */
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
 }
 
-.chart-container {
-  flex: 1;
-  max-width: 45%;
+.chartcontainer {
+  flex-basis: 50%; /* Adjust width to balance layout */
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 250px;
+}
+
+.chartcontainer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .stats-container {
-  flex: 1;
-  max-width: 45%;
+  flex-basis: 40%; /* Adjust width to balance layout */
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid #e4d1b9; /* Warm Sand */
+  border: 1px solid #e4d1b9;
   border-radius: 10px;
-  background-color: #f7f3e8; /* Off-White */
-  margin-left: 20px;
+  background-color: #f7f3e8;
+  height: 300px;
 }
 
-.bar-chart-container {
-  width: 100%;
+.barchartcontainer {
+  width: 80%; /* Adjust width to balance layout */
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.barchartcontainer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .filter-container {
   margin-top: 20px;
   display: flex;
+  justify-content: center; /* Center the filter container */
   align-items: center;
   gap: 10px;
-  background-color: #f7f3e8; /* Off-White */
-  border: 1px solid #e4d1b9; /* Warm Sand */
-  border-radius: 20px; /* Rounded corners */
-  padding: 10px 20px; /* Padding for aesthetic look */
+  background-color: #f7f3e8;
+  border: 1px solid #e4d1b9;
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
 .filter-container select {
-  background-color: #faf3dd; /* Light Beige */
-  border: 1px solid #e4d1b9; /* Warm Sand */
+  background-color: #faf3dd;
+  border: 1px solid #e4d1b9;
   border-radius: 10px;
   padding: 5px 10px;
   font-size: 14px;
-  color: #2e2d2d; /* Dark Slate */
+  color: #2e2d2d;
 }
 
 .filter-container label {
   font-size: 14px;
-  color: #2e2d2d; /* Dark Slate */
+  color: #2e2d2d;
 }
 
 footer {
@@ -107,9 +141,13 @@ footer {
     flex-direction: column;
   }
 
-  .chart-container,
+  .chartcontainer,
   .stats-container {
     max-width: 100%;
     margin-left: 0;
+  }
+
+  .barchartcontainer {
+    width: 100%; /* Ensure the bar chart container takes full width on small screens */
   }
 }

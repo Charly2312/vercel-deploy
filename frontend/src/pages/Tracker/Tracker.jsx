@@ -1,37 +1,51 @@
 import React, { useEffect, useState } from "react";
 import {
-  startOfDay,
   startOfWeek,
   getWeek,
   getMonth,
   getYear,
   format,
-  eachWeekOfInterval,
-  isSameWeek,
   parseISO,
+  isSameWeek,
+  isSameDay,
+  startOfMonth,
+  endOfMonth,
 } from "date-fns";
 import "./Tracker.css";
 import {
-  Chart as ChartJS,
-  ArcElement,
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
   Tooltip,
   Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-} from "chart.js";
-import { Pie, Bar } from "react-chartjs-2";
+  ResponsiveContainer,
+} from "recharts";
 import Sidebar from "../../components/Sidebar";
 import DailyReminder from "../../components/DailyReminder";
+import { supabase } from "../../components/supabaseClient";
 
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement
-);
+const COLORS = ["#8DABA7", "#F4A89A"];
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="custom-tooltip" style={{ backgroundColor: "#fff", padding: "10px", border: "1px solid #ccc" }}>
+        <p className="label">{`${data.name}: ${data.value}`}</p>
+        {data.name === "Completed Tasks" ? (
+          <p>{`Tasks: ${data.completedTaskNames.join(", ")}`}</p>
+        ) : (
+          <p>{`Tasks: ${data.incompleteTaskNames.join(", ")}`}</p>
+        )}
+      </div>
+    );
+  }
+  return null;
+};
 
 function Tracker() {
   const [taskData, setTaskData] = useState({
@@ -42,7 +56,7 @@ function Tracker() {
     completedTaskNames: [],
     incompleteTaskNames: [],
   });
-  const [filter, setFilter] = useState("weekly"); // Default filter set to weekly
+  const [filter, setFilter] = useState("weekly");
   const [selectedMonth, setSelectedMonth] = useState(getMonth(new Date()));
   const [selectedWeek, setSelectedWeek] = useState(getWeek(new Date()));
 
@@ -50,102 +64,82 @@ function Tracker() {
     fetchAndSetTaskData();
   }, [filter, selectedMonth, selectedWeek]);
 
-  const fetchAndSetTaskData = () => {
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || {};
-    const completedTasks = Object.values(tasks)
-      .flat()
-      .filter((task) => task.completed).length;
-    const incompleteTasks = Object.values(tasks)
-      .flat()
-      .filter((task) => !task.completed).length;
-    const totalTasks = Object.values(tasks).flat().length;
-    const completedTaskNames = Object.values(tasks)
-      .flat()
-      .filter((task) => task.completed)
-      .map((task) => task.title);
-    const incompleteTaskNames = Object.values(tasks)
-      .flat()
-      .filter((task) => !task.completed)
-      .map((task) => task.title);
+  const fetchAndSetTaskData = async () => {
+    const { data: tasks, error } = await supabase
+      .from("todolist")
+      .select("*")
+      .eq("user_id", 10);
 
-    let filteredData;
+    if (error) {
+      console.error("Error fetching tasks:", error);
+      return;
+    }
+
+    const completedTaskNames = [];
+    const incompleteTaskNames = [];
+    let completedTasks = 0;
+    let incompleteTasks = 0;
+    let filteredData = [];
+
     if (filter === "daily") {
-      filteredData = getDailyData(tasks);
+      const startOfSelectedWeek = startOfWeek(
+        new Date(getYear(new Date()), selectedMonth, 1 + (selectedWeek - 1) * 7)
+      );
+      filteredData = Array(7).fill(0);
+      tasks.forEach((task) => {
+        const taskDate = parseISO(task.start);
+        if (getMonth(taskDate) === selectedMonth && isSameWeek(taskDate, startOfSelectedWeek)) {
+          const dayOfWeek = taskDate.getDay();
+          if (task.completed) {
+            completedTasks++;
+            completedTaskNames.push(task.title);
+            filteredData[dayOfWeek]++;
+          } else {
+            incompleteTasks++;
+            incompleteTaskNames.push(task.title);
+          }
+        }
+      });
     } else if (filter === "weekly") {
-      filteredData = getWeeklyData(tasks);
+      filteredData = Array(5).fill(0);
+      tasks.forEach((task) => {
+        const taskDate = parseISO(task.start);
+        if (getMonth(taskDate) === selectedMonth) {
+          const weekOfMonth = getWeekOfMonth(taskDate);
+          if (task.completed) {
+            completedTasks++;
+            completedTaskNames.push(task.title);
+            filteredData[weekOfMonth - 1]++;
+          } else {
+            incompleteTasks++;
+            incompleteTaskNames.push(task.title);
+          }
+        }
+      });
     } else if (filter === "monthly") {
-      filteredData = getMonthlyData(tasks);
+      filteredData = Array(12).fill(0);
+      tasks.forEach((task) => {
+        const taskDate = parseISO(task.start);
+        const month = taskDate.getMonth();
+        if (task.completed) {
+          completedTasks++;
+          completedTaskNames.push(task.title);
+          filteredData[month]++;
+        } else {
+          incompleteTasks++;
+          incompleteTaskNames.push(task.title);
+        }
+      });
     }
 
     setTaskData({
       completedTasks,
       incompleteTasks,
-      totalTasks,
+      totalTasks: completedTasks + incompleteTasks,
       filteredData,
       completedTaskNames,
       incompleteTaskNames,
     });
-  };
-
-  const getDailyData = (tasks) => {
-    const dailyData = new Array(7).fill(0);
-    const startOfSelectedWeek = startOfWeek(
-      new Date(getYear(new Date()), selectedMonth, 1 + (selectedWeek - 1) * 7)
-    );
-
-    Object.values(tasks)
-      .flat()
-      .forEach((task) => {
-        if (task.completed) {
-          const taskDate = parseISO(task.start);
-          if (
-            getMonth(taskDate) === selectedMonth &&
-            isSameWeek(taskDate, startOfSelectedWeek)
-          ) {
-            const dayOfWeek = taskDate.getDay();
-            dailyData[dayOfWeek]++;
-          }
-        }
-      });
-
-    console.log(
-      `Daily data for week ${selectedWeek}, month ${selectedMonth}:`,
-      dailyData
-    );
-    return dailyData;
-  };
-
-  const getWeeklyData = (tasks) => {
-    const weeklyData = new Array(5).fill(0); // Assuming up to 5 weeks in a month
-    Object.values(tasks)
-      .flat()
-      .forEach((task) => {
-        if (task.completed) {
-          const taskDate = parseISO(task.start);
-          if (getMonth(taskDate) === selectedMonth) {
-            const weekOfMonth = getWeekOfMonth(taskDate);
-            weeklyData[weekOfMonth - 1]++;
-          }
-        }
-      });
-
-    console.log(`Weekly data for month ${selectedMonth}:`, weeklyData);
-    return weeklyData;
-  };
-
-  const getMonthlyData = (tasks) => {
-    const monthlyData = new Array(12).fill(0);
-    Object.values(tasks)
-      .flat()
-      .forEach((task) => {
-        if (task.completed) {
-          const month = parseISO(task.start).getMonth();
-          monthlyData[month]++;
-        }
-      });
-
-    console.log("Monthly data:", monthlyData);
-    return monthlyData;
   };
 
   const getWeekOfMonth = (date) => {
@@ -166,66 +160,44 @@ function Tracker() {
     setSelectedWeek(parseInt(e.target.value));
   };
 
-  const pieData = {
-    labels: ["Completed Tasks", "Incomplete Tasks"],
-    datasets: [
-      {
-        data: [taskData.completedTasks, taskData.incompleteTasks],
-        backgroundColor: ["#36A2EB", "#FF6384"],
-      },
-    ],
-  };
+  const pieData = [
+    { name: "Completed Tasks", value: taskData.completedTasks, completedTaskNames: taskData.completedTaskNames },
+    { name: "Incomplete Tasks", value: taskData.incompleteTasks, incompleteTaskNames: taskData.incompleteTaskNames },
+  ];
 
-  const barData = {
-    labels:
-      filter === "daily"
-        ? ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-        : filter === "weekly"
-        ? ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
-        : [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-    datasets: [
-      {
-        label: "Tasks Completed",
-        data: taskData.filteredData,
-        backgroundColor: "#36A2EB",
-      },
-    ],
-  };
-
-  const options = {
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            let label = context.label || "";
-            if (label) {
-              label += ": ";
-            }
-            label += context.raw;
-            if (context.label === "Completed Tasks") {
-              label += ` (${taskData.completedTaskNames.join(", ")})`;
-            } else if (context.label === "Incomplete Tasks") {
-              label += ` (${taskData.incompleteTaskNames.join(", ")})`;
-            }
-            return label;
-          },
-        },
-      },
-    },
-  };
+  const barData =
+    filter === "daily"
+      ? [
+          { name: "Sun", value: taskData.filteredData[0] },
+          { name: "Mon", value: taskData.filteredData[1] },
+          { name: "Tue", value: taskData.filteredData[2] },
+          { name: "Wed", value: taskData.filteredData[3] },
+          { name: "Thu", value: taskData.filteredData[4] },
+          { name: "Fri", value: taskData.filteredData[5] },
+          { name: "Sat", value: taskData.filteredData[6] },
+        ]
+      : filter === "weekly"
+      ? [
+          { name: "Week 1", value: taskData.filteredData[0] },
+          { name: "Week 2", value: taskData.filteredData[1] },
+          { name: "Week 3", value: taskData.filteredData[2] },
+          { name: "Week 4", value: taskData.filteredData[3] },
+          { name: "Week 5", value: taskData.filteredData[4] },
+        ]
+      : [
+          { name: "Jan", value: taskData.filteredData[0] },
+          { name: "Feb", value: taskData.filteredData[1] },
+          { name: "Mar", value: taskData.filteredData[2] },
+          { name: "Apr", value: taskData.filteredData[3] },
+          { name: "May", value: taskData.filteredData[4] },
+          { name: "Jun", value: taskData.filteredData[5] },
+          { name: "Jul", value: taskData.filteredData[6] },
+          { name: "Aug", value: taskData.filteredData[7] },
+          { name: "Sep", value: taskData.filteredData[8] },
+          { name: "Oct", value: taskData.filteredData[9] },
+          { name: "Nov", value: taskData.filteredData[10] },
+          { name: "Dec", value: taskData.filteredData[11] },
+        ];
 
   return (
     <div className="tracker-container">
@@ -240,13 +212,32 @@ function Tracker() {
         </header>
         <div className="tracker-content">
           <div className="chart-section">
-            <div className="chart-container">
-              <Pie data={pieData} options={options} />
+            <div className="chartcontainer" style={{ height: "400px" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={160}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<CustomTooltip />} />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
             <div className="stats-container">
               <h2>Total Hours Spent</h2>
-              <p>{taskData.totalTasks * 2}</p>{" "}
-              {/* Example: Assuming each task takes 2 hours */}
+              <p>{taskData.totalTasks * 2}</p>
             </div>
           </div>
           <div className="filter-container">
@@ -289,12 +280,22 @@ function Tracker() {
               </>
             )}
           </div>
-          <div className="bar-chart-container">
-            <Bar data={barData} />
+          <div className="barchartcontainer">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={barData}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="value" fill="#D8A7B1" />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
         <footer>
-          <DailyReminder />
+          <div className="daily-reminder-container">
+            <DailyReminder />
+          </div>
         </footer>
       </div>
     </div>
