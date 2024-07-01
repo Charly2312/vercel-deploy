@@ -5,7 +5,7 @@ import Calendar from "./pages/Calendar";
 import ToDoList from "./pages/ToDoList";
 import Tracker from "./pages/Tracker/Tracker";
 import Timetable from "./pages/Timetable";
-import Settings from "./pages/Settings";
+import Settings from "./pages/Settings/Settings";
 import SignUp from "./pages/SignUp/SignUp";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
