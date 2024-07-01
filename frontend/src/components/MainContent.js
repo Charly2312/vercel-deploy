@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./MainContent.css";
-import Clock from "./Clock";
+import Clock1 from "./Clock1";
 import TDL from "./TDL";
 import EventReminder from "./EventReminder";
 import DailyReminder from "./DailyReminder";
@@ -30,7 +30,7 @@ const MainContent = () => {
       <Header />
       <div className="content-sections">
         <div className="left-section">
-          <Clock />
+          <Clock1 />
         </div>
         <div className="right-section">
           <EventReminder />
