@@ -19,7 +19,7 @@ function Header() {
       .from("users")
       .select("username") // Adjust fields as necessary
       .eq("id", user_id)
-      .maybeSingleingle();
+      .maybeSingle();
 
     if (error) {
       console.error("Error fetching user data:", error);
