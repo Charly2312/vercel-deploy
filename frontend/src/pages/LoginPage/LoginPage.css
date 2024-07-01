@@ -21,7 +21,7 @@ html {
   margin-right: 20px; /* Space between logo and text */
 }
 
-.container {
+.logincontainer {
   display: flex;
   width: 90%;
   max-width: 1200px;
@@ -43,6 +43,16 @@ html {
   text-align: center;
   position: relative;
 }
+
+.clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px; /* Adjust as needed */
+  margin-left: -100px;
+}
+
 
 .login-section {
   background: white;
@@ -120,13 +130,7 @@ canvas {
   background: white;
 }
 
-.clock-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
+
 
 .clock {
   width: 80%;
