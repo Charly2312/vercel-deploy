@@ -1,8 +1,8 @@
 #clock {
-  height: 50vw; /* Responsive based on width of the viewport */
+  height: 50vw;
   width: 50vw;
-  max-height: 500px;
-  max-width: 500px;
+  max-height: 300px;
+  max-width: 300px;
   min-height: 250px;
   min-width: 250px;
   border-radius: 50%;
@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin: auto;  /* Center the clock */
 }
 
 #clockCanvas {
