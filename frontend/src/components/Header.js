@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import "./Header.css";
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 function Header() {
   const { user } = useAuth();
@@ -19,7 +19,7 @@ function Header() {
       .from("users")
       .select("username") // Adjust fields as necessary
       .eq("id", user_id)
-      .single();
+      .maybeSingleingle();
 
     if (error) {
       console.error("Error fetching user data:", error);
