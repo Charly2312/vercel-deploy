@@ -8,7 +8,7 @@ function Clock1() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const radius = canvas.height / 2;
-    ctx.translate(radius / 2, radius / 2);
+    ctx.translate(radius, radius);
 
     function drawClock() {
       ctx.clearRect(-radius, -radius, canvas.width, canvas.height);
