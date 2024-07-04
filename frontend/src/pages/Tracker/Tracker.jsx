@@ -27,6 +27,7 @@ import {
 import Sidebar from "../../components/Sidebar";
 import DailyReminder from "../../components/DailyReminder";
 import { supabase } from "../../components/supabaseClient";
+import { useAuth } from '../../context/AuthContext';
 
 const COLORS = ["#8DABA7", "#F4A89A"];
 
@@ -48,6 +49,8 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function Tracker() {
+  const { user } = useAuth();
+  const user_id = user ? user.id : null;
   const [taskData, setTaskData] = useState({
     completedTasks: 0,
     incompleteTasks: 0,
@@ -68,7 +71,7 @@ function Tracker() {
     const { data: tasks, error } = await supabase
       .from("todolist")
       .select("*")
-      .eq("user_id", 10);
+      .eq("user_id", user_id);
 
     if (error) {
       console.error("Error fetching tasks:", error);
