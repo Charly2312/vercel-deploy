@@ -7,9 +7,12 @@ import EditIcon from "../../assets/edit-icon.png";
 import DeleteIcon from "../../assets/delete-icon.png";
 import { supabase } from "../../components/supabaseClient";
 import { format, startOfWeek, endOfWeek, eachDayOfInterval } from "date-fns";
+import { useAuth } from '../../context/AuthContext';
 
 function ToDoList() {
-  const user_id = 10;
+  const { user } = useAuth();
+  const user_id = user ? user.id : null;
+  //const user_id = 10;
   const [tasks, setTasks] = useState({});
   const [newTask, setNewTask] = useState({
     title: "",
