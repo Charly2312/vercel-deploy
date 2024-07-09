@@ -7,7 +7,7 @@ const ForgotPassword = () => {
   
   const handleResetPassword = async (event) => {
     event.preventDefault();
-    axios.post("https://vercel-deploy-frontend-tau.vercel.app/forgotpassword/send-reset-email", {email})
+    axios.post("https://vercel-deploy-frontend-tau.vercel.app/send-reset-email", {email})
     .then(result => console.log(result))
     .catch(err => console.log(err))
   }
