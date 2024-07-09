@@ -1,27 +1,16 @@
-// src/pages/ForgotPassword.jsx
 import React, { useState } from "react";
 import "./ForgotPassword.css";
-
+import axios from "axios";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-
+  console.log(email);
+  
   const handleResetPassword = async (event) => {
     event.preventDefault();
-
-    try {
-      const response = await fetch("/send-reset-email", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: email })
-      });
-      const data = await response.json();
-      alert(data.message);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+    axios.post("https://vercel-deploy-frontend-tau.vercel.app/send-reset-email", {email})
+    .then(result => console.log(result))
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className="reset-container">
