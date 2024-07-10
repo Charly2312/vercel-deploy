@@ -10,10 +10,6 @@ const ForgotPassword = () => {
     axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
     .then(result => console.log(result))
     .catch(err => console.log(err))
-    if (result) {
-      return alert("password reset email is sent successfully");
-    }
-    alert ("process failed");
   }
 
   return (
