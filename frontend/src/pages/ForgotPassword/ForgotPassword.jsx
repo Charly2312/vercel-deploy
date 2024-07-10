@@ -10,6 +10,12 @@ const ForgotPassword = () => {
     axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
     .then(result => console.log(result))
     .catch(err => console.log(err))
+
+    
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://vercel-deploy-frontend-tau.vercel.app/newpassword',
+  })
+
   }
 
   return (
