@@ -18,6 +18,10 @@ const ForgotPassword = () => {
     redirectTo: 'https://vercel-deploy-frontend-tau.vercel.app/newpassword',
   })
 
+  if (error) {
+    return alert("email cannot be sent to email");
+  }
+  alert ("email is sent successfully!");
   }
 
   return (
