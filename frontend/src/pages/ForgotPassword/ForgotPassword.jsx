@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     if (result) {
       return alert("password reset email is sent successfully");
     }
-    return alert("process failed");
+    alert ("process failed");
   }
 
   return (
