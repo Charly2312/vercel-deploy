@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./ForgotPassword.css";
 import axios from "axios";
+import { supabase } from '../../components/supabaseClient'; 
+
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   console.log(email);
