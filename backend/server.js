@@ -3,6 +3,7 @@ import cors from "cors";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import bcrypt from "bcryptjs";
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 //import path from "path";
 
 //creating the supabase client
@@ -11,6 +12,9 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2YnJmZnB2eGdveWhhb3FybWRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc2NTM3OTksImV4cCI6MjAzMzIyOTc5OX0.q-Ww1QoOBekFK0qS4rDUWDDVZ7KOvn1P-Pq205tTsjQ";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
+const mailerSend = new MailerSend({
+  api_key: "mlsn.9cb7d6d15dd19366d1991672440ab42c63eaff945f5c512f1235a9e157040984"
+});
 
 const app = express();
 const PORT = 5000; //react by default uses port 3000. DONT put 3000 here!
@@ -48,7 +52,7 @@ app.post('/send-reset-email', async (req, res) => {
     console.error('Error requesting password reset:', error);
     return res.status(500).json({ message: "Failed to send reset email", details: error.message });
   } else {
-    resend.emails.send({
+    /*resend.emails.send({
       from: 'onboarding@resend.dev',
       //from:'ontrack@support.com',
       to: email,
@@ -56,7 +60,24 @@ app.post('/send-reset-email', async (req, res) => {
       html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'
     });
     console.log('Reset password email sent:', data);
-    res.json({ message: "Reset email sent successfully" });
+    res.json({ message: "Reset email sent successfully" });*/
+    const recipients = [{ email: email }];
+    const emailParams = {
+      from: "your_email@example.com",
+      from_name: "Your Name",
+      to: recipients,
+      subject: 'Reset password link',
+      html: '<p>Press the link to reset your password: <a href="https://vercel-deploy-frontend-tau.vercel.app/newpassword">Reset Password</a></p>'
+    };
+
+    try {
+      await mailerSend.send(emailParams);
+      console.log('Reset password email sent:', data);
+      res.json({ message: "Reset email sent successfully" });
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
+    }
   }
 });
 
