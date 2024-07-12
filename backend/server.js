@@ -12,6 +12,7 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2YnJmZnB2eGdveWhhb3FybWRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc2NTM3OTksImV4cCI6MjAzMzIyOTc5OX0.q-Ww1QoOBekFK0qS4rDUWDDVZ7KOvn1P-Pq205tTsjQ";
 const supabase = createClient(supabaseUrl, supabaseKey);
 const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
+
 const mailerSend = new MailerSend({
   apiKey: "mlsn.02be3c525630c0a15bac97228063acbc77ce491c6c6736c557b420d9749ca359"
 });
@@ -52,7 +53,7 @@ app.post('/send-reset-email', async (req, res) => {
     console.error('Error requesting password reset:', error);
     return res.status(500).json({ message: "Failed to send reset email", details: error.message });
   } else {
-    resend.emails.send({
+    /*resend.emails.send({
       from: 'onboarding@resend.dev',
       //from:'ontrack@support.com',
       to: email,
@@ -60,9 +61,9 @@ app.post('/send-reset-email', async (req, res) => {
       html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'
     });
     console.log('Reset password email sent:', data);
-    res.json({ message: "Reset email sent successfully" });
+    res.json({ message: "Reset email sent successfully" });*/
 
-    const recipients = [{ email: email }];
+    /*const recipients = [{ email: email }];
     const emailParams = {
       from: "your_email@example.com",
       from_name: "Your Name",
@@ -78,7 +79,21 @@ app.post('/send-reset-email', async (req, res) => {
     } catch (emailError) {
       console.error('Error sending email:', emailError);
       res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
-    }
+    }*/
+
+    const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net.com", "ontrack");
+
+    const recipients = [new Recipient(email, "client")];
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(sentFrom)
+      .setSubject("This is to reset your password")
+      .setHtml("<strong>This is the HTML content</strong>")
+      .setText("This is the text content");
+    
+    await mailerSend.email.send(emailParams);
   }
 });
 
