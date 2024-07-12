@@ -14,14 +14,14 @@ const ForgotPassword = () => {
     .catch(err => console.log(err))
 
     
-  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+  /*const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: 'https://vercel-deploy-frontend-tau.vercel.app/newpassword',
   })
 
   if (error) {
     return alert("email cannot be sent to email");
   }
-  alert ("email is sent successfully!");
+  alert ("email is sent successfully!");*/
   }
 
   return (
