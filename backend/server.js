@@ -13,7 +13,7 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey);
 const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
 const mailerSend = new MailerSend({
-  apiKey: "mlsn.9cb7d6d15dd19366d1991672440ab42c63eaff945f5c512f1235a9e157040984"
+  apiKey: "mlsn.02be3c525630c0a15bac97228063acbc77ce491c6c6736c557b420d9749ca359"
 });
 
 const app = express();
@@ -62,7 +62,7 @@ app.post('/send-reset-email', async (req, res) => {
     console.log('Reset password email sent:', data);
     res.json({ message: "Reset email sent successfully" });
 
-    /*const recipients = [{ email: email }];
+    const recipients = [{ email: email }];
     const emailParams = {
       from: "your_email@example.com",
       from_name: "Your Name",
@@ -78,7 +78,7 @@ app.post('/send-reset-email', async (req, res) => {
     } catch (emailError) {
       console.error('Error sending email:', emailError);
       res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
-    }*/
+    }
   }
 });
 
