@@ -52,7 +52,7 @@ app.post('/send-reset-email', async (req, res) => {
     console.error('Error requesting password reset:', error);
     return res.status(500).json({ message: "Failed to send reset email", details: error.message });
   } else {
-    /*resend.emails.send({
+    resend.emails.send({
       from: 'onboarding@resend.dev',
       //from:'ontrack@support.com',
       to: email,
@@ -60,8 +60,9 @@ app.post('/send-reset-email', async (req, res) => {
       html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'
     });
     console.log('Reset password email sent:', data);
-    res.json({ message: "Reset email sent successfully" });*/
-    const recipients = [{ email: email }];
+    res.json({ message: "Reset email sent successfully" });
+
+    /*const recipients = [{ email: email }];
     const emailParams = {
       from: "your_email@example.com",
       from_name: "Your Name",
@@ -77,7 +78,7 @@ app.post('/send-reset-email', async (req, res) => {
     } catch (emailError) {
       console.error('Error sending email:', emailError);
       res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
-    }
+    }*/
   }
 });
 
