@@ -93,7 +93,15 @@ app.post('/send-reset-email', async (req, res) => {
       .setHtml("<strong>This is the HTML content</strong>")
       .setText("This is the text content");
     
-    await mailerSend.email.send(emailParams);
+    
+    try {
+      await mailerSend.email.send(emailParams);
+      console.log('Reset password email sent:', data);
+      res.json({ message: "Reset email sent successfully" });
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
+    }
   }
 });
 
