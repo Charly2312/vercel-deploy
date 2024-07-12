@@ -53,7 +53,7 @@ app.post('/send-reset-email', async (req, res) => {
     console.error('Error requesting password reset:', error);
     return res.status(500).json({ message: "Failed to send reset email", details: error.message });
   } else {
-    /*resend.emails.send({
+    resend.emails.send({
       from: 'onboarding@resend.dev',
       //from:'ontrack@support.com',
       to: email,
@@ -61,27 +61,9 @@ app.post('/send-reset-email', async (req, res) => {
       html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'
     });
     console.log('Reset password email sent:', data);
-    res.json({ message: "Reset email sent successfully" });*/
+    res.json({ message: "Reset email sent successfully" });
 
-    /*const recipients = [{ email: email }];
-    const emailParams = {
-      from: "your_email@example.com",
-      from_name: "Your Name",
-      to: recipients,
-      subject: 'Reset password link',
-      html: '<p>Press the link to reset your password: <a href="https://vercel-deploy-frontend-tau.vercel.app/newpassword">Reset Password</a></p>'
-    };
-
-    try {
-      await mailerSend.send(emailParams);
-      console.log('Reset password email sent:', data);
-      res.json({ message: "Reset email sent successfully" });
-    } catch (emailError) {
-      console.error('Error sending email:', emailError);
-      res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
-    }*/
-
-    const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net.com", "ontrack");
+    /*const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net.com", "ontrack");
 
     const recipients = [new Recipient(email, "client")];
 
@@ -101,7 +83,7 @@ app.post('/send-reset-email', async (req, res) => {
     } catch (emailError) {
       console.error('Error sending email:', emailError);
       res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
-    }
+    }*/
   }
 });
 

@@ -9,16 +9,17 @@ const ForgotPassword = () => {
   
   const handleResetPassword = async (event) => {
     event.preventDefault();
-    axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
+
+    /*axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
     .then(result => console.log(result))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err))*/
 
     
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: 'https://vercel-deploy-frontend-tau.vercel.app/newpassword',
   })
 
-  if (error) {
+  if (error || !data) {
     return alert("email cannot be sent to email");
   }
   alert ("email is sent successfully!");
