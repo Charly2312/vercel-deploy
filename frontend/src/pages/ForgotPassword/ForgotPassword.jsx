@@ -22,7 +22,8 @@ const ForgotPassword = () => {
   if (error || !data) {
     return alert("email cannot be sent to email");
   }
-  alert ("email is sent successfully!");
+  console.log("fetched data:", data);
+  return alert ("email is sent successfully!");
   }
 
   return (
