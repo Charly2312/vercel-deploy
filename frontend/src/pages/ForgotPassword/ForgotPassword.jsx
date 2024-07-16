@@ -19,7 +19,7 @@ const emailParams = new EmailParams()
   .setTo(recipients)
   .setReplyTo(sentFrom)
   .setSubject("This is a subject")
-  .setHtml("<strong>This is the HTML content</strong>")
+  .setHtml("<strong>This is the HTML content without link</strong>")
   .setText("this is the text content");
 
 const ForgotPassword = () => {
