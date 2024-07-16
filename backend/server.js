@@ -14,8 +14,23 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
 
 const mailerSend = new MailerSend({
-  apiKey: "mlsn.8f3948f1c0ad86138d242a749a946369bf484a6c665e493095a33b221e72f16c"
+  apiKey: "mlsn.8f3948f1c0ad86138d242a749a946369bf484a6c665e493095a33b221e72f16c",
 });
+
+const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net", "ontrack");
+
+const recipients = [
+  new Recipient(email, "user")
+];
+
+const emailParams = new EmailParams()
+  .setFrom(sentFrom)
+  .setTo(recipients)
+  .setReplyTo(sentFrom)
+  .setSubject("This is a subject")
+  .setHtml("<strong>This is the HTML content</strong>")
+  .setText("this is the text content");
+
 
 const app = express();
 const PORT = 5000; //react by default uses port 3000. DONT put 3000 here!
@@ -62,20 +77,6 @@ app.post('/send-reset-email', async (req, res) => {
     });
     console.log('Reset password email sent:', data);
     res.json({ message: "Reset email sent successfully" });
-
-    const sentFrom = new Sender("ontrack@ ", "Your name");
-
-    const recipients = [
-      new Recipient("your@client.com", "Your Client")
-    ];
-
-    const emailParams = new EmailParams()
-      .setFrom(sentFrom)
-      .setTo(recipients)
-      .setReplyTo(sentFrom)
-      .setSubject("This is a Subject")
-      .setHtml("<strong>This is the HTML content</strong>")
-      .setText("This is the text content");
 
     await mailerSend.email.send(emailParams);
   }

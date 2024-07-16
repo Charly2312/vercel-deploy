@@ -2,25 +2,6 @@ import React, { useState } from "react";
 import "./ForgotPassword.css";
 import axios from "axios";
 import { supabase } from '../../components/supabaseClient'; 
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
-
-const mailerSend = new MailerSend({
-  apiKey: "mlsn.8f3948f1c0ad86138d242a749a946369bf484a6c665e493095a33b221e72f16c",
-});
-
-const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net", "ontrack");
-
-const recipients = [
-  new Recipient(email, "user")
-];
-
-const emailParams = new EmailParams()
-  .setFrom(sentFrom)
-  .setTo(recipients)
-  .setReplyTo(sentFrom)
-  .setSubject("This is a subject")
-  .setHtml("<strong>This is the HTML content</strong>")
-  .setText("this is the text content");
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -29,9 +10,9 @@ const ForgotPassword = () => {
   const handleResetPassword = async (event) => {
     event.preventDefault();
 
-    /*axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
+    axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
     .then(result => console.log(result))
-    .catch(err => console.log(err))*/
+    .catch(err => console.log(err))
 
     
   /*const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -43,7 +24,6 @@ const ForgotPassword = () => {
   }
   console.log("fetched data:", data);
   return alert ("email is sent successfully!");*/
-  await mailerSend.mail.send(emailParams);
   }
 
   return (
