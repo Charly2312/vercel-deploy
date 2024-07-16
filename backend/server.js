@@ -38,15 +38,15 @@ app.get('/', (req, res) => {
 //-> send email
 app.post('/send-reset-email', async (req, res) => {
   const { email } = req.body;
-  console.log('POST Request received');  
+  console.log('POST Request received');
   console.log('Received data:', req.body);
 
   const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('email', email)
-      .maybeSingle()
-  
+    .from('users')
+    .select('id')
+    .eq('email', email)
+    .maybeSingle()
+
   console.log('Fetched user data:', data);
 
   if (error) {
@@ -63,40 +63,34 @@ app.post('/send-reset-email', async (req, res) => {
     console.log('Reset password email sent:', data);
     res.json({ message: "Reset email sent successfully" });
 
-    /*const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net.com", "ontrack");
+    const sentFrom = new Sender("ontrack@ ", "Your name");
 
-    const recipients = [new Recipient(email, "client")];
+    const recipients = [
+      new Recipient("your@client.com", "Your Client")
+    ];
 
     const emailParams = new EmailParams()
       .setFrom(sentFrom)
       .setTo(recipients)
       .setReplyTo(sentFrom)
-      .setSubject("This is to reset your password")
+      .setSubject("This is a Subject")
       .setHtml("<strong>This is the HTML content</strong>")
       .setText("This is the text content");
-    
-    
-    try {
-      await mailerSend.email.send(emailParams);
-      console.log('Reset password email sent:', data);
-      res.json({ message: "Reset email sent successfully" });
-    } catch (emailError) {
-      console.error('Error sending email:', emailError);
-      res.status(500).json({ message: "Failed to send reset email", details: emailError.message });
-    }*/
+
+    await mailerSend.email.send(emailParams);
   }
 });
 
-/*
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});*/
-
-app.get("/api", (req,res)=>{
-    res.send({"users":["userOne", "userTwo", "userThree"]});
+app.get("/api", (req, res) => {
+  res.send({ "users": ["userOne", "userTwo", "userThree"] });
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+/*
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});*/
