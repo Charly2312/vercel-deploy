@@ -14,7 +14,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const resend = new Resend('re_W5NpBXy2_E55ucKWASgE5n9U55edddSFK')
 
 const mailerSend = new MailerSend({
-  apiKey: "mlsn.02be3c525630c0a15bac97228063acbc77ce491c6c6736c557b420d9749ca359"
+  apiKey: "mlsn.8f3948f1c0ad86138d242a749a946369bf484a6c665e493095a33b221e72f16c"
 });
 
 const app = express();

@@ -20,6 +20,7 @@
     "chart.js": "^4.4.3",
     "date-fns": "^3.6.0",
     "link": "^2.1.1",
+    "mailersend": "^2.2.0",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
