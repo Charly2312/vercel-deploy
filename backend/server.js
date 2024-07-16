@@ -17,21 +17,6 @@ const mailerSend = new MailerSend({
   apiKey: "mlsn.8f3948f1c0ad86138d242a749a946369bf484a6c665e493095a33b221e72f16c",
 });
 
-const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net", "ontrack");
-
-const recipients = [
-  new Recipient(email, "user")
-];
-
-const emailParams = new EmailParams()
-  .setFrom(sentFrom)
-  .setTo(recipients)
-  .setReplyTo(sentFrom)
-  .setSubject("This is a subject")
-  .setHtml("<strong>This is the HTML content</strong>")
-  .setText("this is the text content");
-
-
 const app = express();
 const PORT = 5000; //react by default uses port 3000. DONT put 3000 here!
 
@@ -68,15 +53,25 @@ app.post('/send-reset-email', async (req, res) => {
     console.error('Error requesting password reset:', error);
     return res.status(500).json({ message: "Failed to send reset email", details: error.message });
   } else {
-    resend.emails.send({
+    /*resend.emails.send({
       from: 'onboarding@resend.dev',
       //from:'ontrack@support.com',
       to: email,
       subject: 'Reset password link',
-      html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'
-    });
-    console.log('Reset password email sent:', data);
-    res.json({ message: "Reset email sent successfully" });
+      html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'*/
+    const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net", "ontrack");
+
+    const recipients = [
+      new Recipient(email, "user")
+    ];
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(sentFrom)
+      .setSubject("This is a subject")
+      .setHtml("<strong>This is the HTML content</strong>")
+      .setText("this is the text content");
 
     await mailerSend.email.send(emailParams);
   }
