@@ -69,8 +69,8 @@ app.post('/send-reset-email', async (req, res) => {
       .setFrom(sentFrom)
       .setTo(recipients)
       .setReplyTo(sentFrom)
-      .setSubject("This is a subject")
-      .setHtml("<strong>This is the HTML content</strong>")
+      .setSubject("Reset password link")
+      .setHtml("<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>")
       .setText("this is the text content");
 
     await mailerSend.email.send(emailParams);
