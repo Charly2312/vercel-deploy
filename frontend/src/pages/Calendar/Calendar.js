@@ -157,7 +157,8 @@ function Calendar() {
   };
 
   const handleEventMouseEnter = (info) => {
-    setHoveredEvent(info.event);
+    const eventPosition = info.jsEvent.currentTarget.getBoundingClientRect();
+    setHoveredEvent({ event: info.event, position: eventPosition });
   };
 
   const handleEventMouseLeave = () => {
@@ -185,14 +186,20 @@ function Calendar() {
           height="100%" /* Ensure FullCalendar takes the full height */
           width="100%" /* Ensure FullCalendar takes the full width */
         />
-        {hoveredEvent && (
-          <div className="hover-popup">
-            <h3>{hoveredEvent.title}</h3>
-            <p>{hoveredEvent.extendedProps.description}</p>
+        {hoveredEvent && hoveredEvent.event && (
+          <div
+            className="hover-popup"
+            style={{
+              top: hoveredEvent.position.top + window.scrollY,
+              left: hoveredEvent.position.left + window.scrollX
+            }}
+          >
+            <h3>{hoveredEvent.event.title}</h3>
+            <p>{hoveredEvent.event.extendedProps?.description || "No description available"}</p>
             <p>
-              {new Date(hoveredEvent.start).toLocaleString()} -{" "}
-              {hoveredEvent.end
-                ? new Date(hoveredEvent.end).toLocaleString()
+              {new Date(hoveredEvent.event.start).toLocaleString()} -{" "}
+              {hoveredEvent.event.end
+                ? new Date(hoveredEvent.event.end).toLocaleString()
                 : "N/A"}
             </p>
           </div>
@@ -213,19 +220,17 @@ function Calendar() {
                   }
                   placeholder="Event Title"
                 />
-                <label>
-                  All Day
+                <div className="all-day-checkbox">
+                  <label htmlFor="allDayCheckbox">All Day</label>
                   <input
+                    id="allDayCheckbox"
                     type="checkbox"
                     checked={eventDetails.allDay}
                     onChange={(e) =>
-                      setEventDetails({
-                        ...eventDetails,
-                        allDay: e.target.checked,
-                      })
+                      setEventDetails({ ...eventDetails, allDay: e.target.checked })
                     }
                   />
-                </label>
+                </div>
                 <input
                   type="datetime-local"
                   value={eventDetails.start}
@@ -291,8 +296,8 @@ function Calendar() {
                 <strong>Description:</strong>{" "}
                 {selectedEvent.extendedProps.description}
               </p>
-              <button onClick={handleEdit}>Edit</button>
-              <button onClick={handleDelete}>Delete</button>
+              <button className ="edit-button" onClick={handleEdit}>Edit</button>
+              <button className ="delete-button" onClick={handleDelete}>Delete</button>
             </div>
           </div>
         )}

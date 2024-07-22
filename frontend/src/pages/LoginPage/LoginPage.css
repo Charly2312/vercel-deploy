@@ -8,10 +8,10 @@ html {
   justify-content: center;
   background: linear-gradient(
     to top,
-    #edc7b7 0%,
-    #edc7b7 50%,
-    #123c69 50%,
-    #123c69 100%
+    #f2f2f2 0%,
+    #f2f2f2 50%,
+    #ffffff 50%,
+    #ffffff 100%
   );
 }
 
@@ -31,7 +31,7 @@ html {
 }
 
 .info-section {
-  background: #eee2dc;
+  background: #f2ece2;
   color: #333;
   font-weight: bold;
   width: 50%;
@@ -87,7 +87,7 @@ input[type="password"] {
 }
 
 button {
-  background-color: #ac3b61;
+  background-color: #b8997c;
   color: white;
   border: none;
   border-radius: 5px;
@@ -95,7 +95,7 @@ button {
 }
 
 button:hover {
-  background-color: rgba(96, 35, 58, 0.958);
+  background-color: rgba(96, 79, 35, 0.958);
 }
 
 .options {
@@ -105,7 +105,7 @@ button:hover {
 }
 
 .forgot-password {
-  color: #ac3b61;
+  color: #3b6934;
   text-decoration: none;
   font-size: 10px;
 }

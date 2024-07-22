@@ -5,10 +5,8 @@ import {
   endOfMonth,
   eachDayOfInterval,
   isSameDay,
-  isSameWeek,
   isSameMonth,
-  startOfWeek,
-  endOfWeek,
+  addDays,
 } from "date-fns";
 import "./EventReminder.css";
 import { supabase } from "./supabaseClient";
@@ -23,7 +21,7 @@ function EventReminder() {
   useEffect(() => {
     const fetchEvents = async () => {
       const { data, error } = await supabase
-        .from("todolist")
+        .from("events")
         .select("*")
         .eq("user_id", user_id);
 
@@ -35,14 +33,14 @@ function EventReminder() {
     };
 
     fetchEvents();
-  }, []);
+  }, [user_id]);
 
   useEffect(() => {
-    const start = startOfWeek(new Date(), { weekStartsOn: 0 });
-    const end = endOfWeek(new Date(), { weekStartsOn: 0 });
+    const start = new Date();
+    const end = addDays(start, 7);
 
     const weekEvents = events.filter((event) =>
-      isSameWeek(new Date(event.start), start, { weekStartsOn: 0 })
+      new Date(event.start) >= start && new Date(event.start) <= end
     );
 
     // Sort weekEvents by date and time
@@ -56,6 +54,10 @@ function EventReminder() {
     start: startOfMonth(currentMonth),
     end: endOfMonth(currentMonth),
   });
+
+  // Adjust the first week to align with the correct starting day of the month
+  const firstDayOfMonth = startOfMonth(currentMonth).getDay();
+  const blankDaysArray = Array.from({ length: firstDayOfMonth }, (_, i) => i);
 
   return (
     <div className="event-reminder-container">
@@ -72,26 +74,39 @@ function EventReminder() {
             </tr>
           </thead>
           <tbody>
-            {calendarDays
-              .reduce((rows, day, index) => {
-                if (index % 7 === 0) rows.push([]);
-                rows[rows.length - 1].push(day);
-                return rows;
-              }, [])
-              .map((week, rowIndex) => (
-                <tr key={rowIndex}>
-                  {week.map((day, colIndex) => (
-                    <td
-                      key={colIndex}
-                      className={`${
-                        !isSameMonth(day, currentMonth) ? "disabled" : ""
-                      } ${isSameDay(day, new Date()) ? "today" : ""}`}
-                    >
-                      {format(day, "d")}
-                    </td>
-                  ))}
-                </tr>
+            <tr>
+              {blankDaysArray.map((_, index) => (
+                <td key={index} className="empty"></td>
               ))}
+              {calendarDays.slice(0, 7 - firstDayOfMonth).map((day, index) => (
+                <td
+                  key={index}
+                  className={`${
+                    isSameDay(day, new Date()) ? "today" : ""
+                  }`}
+                >
+                  {format(day, "d")}
+                </td>
+              ))}
+            </tr>
+            {calendarDays.slice(7 - firstDayOfMonth).reduce((rows, day, index) => {
+              if (index % 7 === 0) rows.push([]);
+              rows[rows.length - 1].push(day);
+              return rows;
+            }, []).map((week, rowIndex) => (
+              <tr key={rowIndex}>
+                {week.map((day, colIndex) => (
+                  <td
+                    key={colIndex}
+                    className={`${
+                      isSameMonth(day, currentMonth) ? "" : "disabled"
+                    } ${isSameDay(day, new Date()) ? "today" : ""}`}
+                  >
+                    {format(day, "d")}
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

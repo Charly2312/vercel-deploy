@@ -1,7 +1,7 @@
 .tracker-container {
   display: flex;
   height: 105vh;
-  width: 83vw; /* Use full width for a balanced layout */
+  width: 86vw; /* Use full width for a balanced layout */
   overflow: hidden;
   margin-left: 250px;
 }

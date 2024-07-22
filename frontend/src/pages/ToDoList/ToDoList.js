@@ -12,7 +12,6 @@ import { useAuth } from '../../context/AuthContext';
 function ToDoList() {
   const { user } = useAuth();
   const user_id = user ? user.id : null;
-  //const user_id = 10;
   const [tasks, setTasks] = useState({});
   const [newTask, setNewTask] = useState({
     title: "",
@@ -216,13 +215,20 @@ function ToDoList() {
     <div className="todo-list-container">
       <Sidebar />
       <div className="todo-list-main">
-        <header>
-          <h1>To-Do List</h1>
-          <div className="link-buttons">
-            <button>Link to Canvas</button>
-            <button>Import link here</button>
-          </div>
-        </header>
+      <header>
+  <h1>To-Do List</h1>
+  <div>
+    <button className="canvas-button" >Link to Canvas</button>
+    <button className="link-button">Import link here</button>
+    <button
+      className="completed-tasks-button"
+      onClick={() => setShowCompletedTasks(!showCompletedTasks)}
+    >
+      {showCompletedTasks ? "Hide" : "Show"} Completed Tasks
+    </button>
+  </div>
+</header>
+
         <div className="days">
           {days.map((day) => (
             <div key={day} className="day-section">
@@ -320,70 +326,75 @@ function ToDoList() {
             </div>
           ))}
         </div>
-        {isModalOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={() => setIsModalOpen(false)}>
-                &times;
-              </span>
-              <h2>
-                {isEditing ? "Edit Task" : "New Task"} for {currentDay}
-              </h2>
-              <input
-                type="text"
-                value={newTask.title}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, title: e.target.value })
-                }
-                placeholder="Task Name"
-              />
-              <input
-                type="date"
-                value={newTask.dueDate}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, dueDate: e.target.value })
-                }
-              />
-              <input
-                type="time"
-                value={newTask.time}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, time: e.target.value })
-                }
-              />
-              <textarea
-                value={newTask.description}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, description: e.target.value })
-                }
-                placeholder="Description"
-              ></textarea>
-              <select
-                value={newTask.priority}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, priority: e.target.value })
-                }
-              >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-              <button onClick={handleSubmit}>
-                {isEditing ? "Update Task" : "Save Task"}
-              </button>
-            </div>
-          </div>
-        )}
+{isModalOpen && (
+  <div className="modal">
+    <div className="modal-content">
+      <span className="close" onClick={() => setIsModalOpen(false)}>
+        &times;
+      </span>
+      <h2>
+        {isEditing ? "Edit Task" : "New Task"} for {currentDay}
+      </h2>
+      <label htmlFor="taskName">Task Name</label>
+      <input
+        id="taskName"
+        type="text"
+        value={newTask.title}
+        onChange={(e) =>
+          setNewTask({ ...newTask, title: e.target.value })
+        }
+        placeholder="Task Name"
+      />
+      <label htmlFor="dueDate">Due Date</label>
+      <input
+        id="dueDate"
+        type="date"
+        value={newTask.dueDate}
+        onChange={(e) =>
+          setNewTask({ ...newTask, dueDate: e.target.value })
+        }
+      />
+      <label htmlFor="dueTime">Due Time</label>
+      <input
+        id="dueTime"
+        type="time"
+        value={newTask.time}
+        onChange={(e) =>
+          setNewTask({ ...newTask, time: e.target.value })
+        }
+      />
+      <label htmlFor="description">Description</label>
+      <textarea
+        id="description"
+        value={newTask.description}
+        onChange={(e) =>
+          setNewTask({ ...newTask, description: e.target.value })
+        }
+        placeholder="Description"
+      ></textarea>
+      <label htmlFor="priority">Priority</label>
+      <select
+        id="priority"
+        value={newTask.priority}
+        onChange={(e) =>
+          setNewTask({ ...newTask, priority: e.target.value })
+        }
+      >
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <button onClick={handleSubmit}>
+        {isEditing ? "Update Task" : "Save Task"}
+      </button>
+    </div>
+  </div>
+)}
+
         <footer>
           <div className="daily-reminder">
             <DailyReminder />
           </div>
-          <button
-            className="completed-tasks-button"
-            onClick={() => setShowCompletedTasks(!showCompletedTasks)}
-          >
-            {showCompletedTasks ? "Hide" : "Show"} Completed Tasks
-          </button>
         </footer>
       </div>
     </div>

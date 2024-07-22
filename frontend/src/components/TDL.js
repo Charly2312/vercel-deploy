@@ -5,8 +5,7 @@ import { format } from "date-fns";
 import { useAuth } from '../context/AuthContext';
 
 const TDL = () => {
-  //const user_id = 10;
-  const {user} = useAuth();
+  const { user } = useAuth();
   const user_id = user ? user.id : null;
   const [tasks, setTasks] = useState([]);
   const [todayTasks, setTodayTasks] = useState([]);
@@ -34,7 +33,7 @@ const TDL = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [user_id]);
 
   useEffect(() => {
     const today = format(new Date(), "yyyy-MM-dd");
@@ -50,10 +49,11 @@ const TDL = () => {
           <ul>
             {todayTasks.map((task, index) => (
               <li key={index} className={task.completed ? "completed" : ""}>
-                <div>
-                  <strong>{task.title}</strong>
+                <div className="task-header">
+                  <div className="circle"></div>
+                  <span className="task-title">{task.title}</span>
                 </div>
-                <div>{task.description}</div>
+                <div className="task-desc">{task.description}</div>
               </li>
             ))}
           </ul>

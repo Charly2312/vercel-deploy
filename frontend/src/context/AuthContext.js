@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { supabase } from '../components/supabaseClient';
 
 const AuthContext = createContext();
 
@@ -16,9 +17,20 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const logout = () => {
-    localStorage.removeItem('user');
-    setUser(null);
+  const logout = async () => {
+    if (user) {
+      const { error } = await supabase
+        .from('users')
+        .update({ notification_shown: false })
+        .eq('id', user.id);
+
+      if (error) {
+        console.error('Error resetting notification shown status:', error);
+      } else {
+        localStorage.removeItem('user');
+        setUser(null);
+      }
+    }
   };
 
   return (

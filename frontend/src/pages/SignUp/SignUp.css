@@ -10,10 +10,10 @@ html {
   height: 100vh;
   background: linear-gradient(
     to top,
-    #edc7b7 0%,
-    #edc7b7 50%,
-    #eee2dc 50%,
-    #eee2dc 100%
+    #f2f2f2 0%,
+    #f2f2f2 50%,
+    #ffffff 50%,
+    #ffffff 100%
   );
 }
 

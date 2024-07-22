@@ -1,29 +1,15 @@
 import React, { useState } from "react";
 import "./ForgotPassword.css";
 import axios from "axios";
-import { supabase } from '../../components/supabaseClient'; 
-
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   console.log(email);
   
   const handleResetPassword = async (event) => {
     event.preventDefault();
-
-    axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
+    axios.post("https://vercel-deploy-frontend-tau.vercel.app/send-reset-email", {email})
     .then(result => console.log(result))
     .catch(err => console.log(err))
-
-    
-  /*const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: 'https://vercel-deploy-frontend-tau.vercel.app/newpassword',
-  })
-
-  if (error || !data) {
-    return alert("email cannot be sent to email");
-  }
-  console.log("fetched data:", data);
-  return alert ("email is sent successfully!");*/
   }
 
   return (

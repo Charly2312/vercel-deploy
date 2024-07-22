@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../components/supabaseClient";
 import Sidebar from "../../components/Sidebar";
+import { useAuth } from "../../context/AuthContext";
 import "./Settings.css";
+import bcrypt from "bcryptjs";
 
 function Settings() {
-  const user_id = 10; // Replace with the actual user ID
+  const { user } = useAuth();
+  const user_id = user ? user.id : null; // Use the actual user ID from AuthContext
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -27,6 +30,7 @@ function Settings() {
       .select("*")
       .eq("id", user_id)
       .single();
+
     if (error) {
       console.error("Error fetching user data:", error);
     } else {
@@ -42,42 +46,30 @@ function Settings() {
     }));
   };
 
-  const handlePasswordChange = (e) => {
-    setNewPassword(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const handleOldPasswordChange = (e) => {
-    setOldPassword(e.target.value);
-  };
-
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      await uploadProfilePicture(file);
-    }
-  };
 
-  const uploadProfilePicture = async (file) => {
+    if (!file) return
+
     const fileName = `${user_id}-${file.name}`;
+    const filePath = `profile-pics/${fileName}`;
     console.log(`Uploading file: ${fileName}`);
-    const { data, error } = await supabase.storage
+    
+    const { data, error } = await supabase
+      .storage
       .from("profile-pics")
-      .upload(fileName, file, {
-        cacheControl: "3600",
-        upsert: true,
-      });
-
-    if (error) {
-      console.error("Error uploading profile picture:", error);
-    } else {
-      console.log("File uploaded successfully:", data);
-      const filePath = data.path;
-      await updateProfilePicture(filePath);
-    }
+      .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+  
+      if (error) {
+        console.error("Error uploading profile picture:", error);
+      } else {
+        console.log("File uploaded successfully:", data);
+        const filePath = data.path;
+        await updateProfilePicture(filePath);
+      }
   };
 
   const updateProfilePicture = async (filePath) => {
@@ -128,9 +120,9 @@ function Settings() {
     // Check if old password is correct before updating
     const { data: user, error: fetchError } = await supabase
       .from("users")
-      .select("password")
+      .select("*")
       .eq("id", user_id)
-      .single();
+      .maybeSingle();
 
     if (fetchError) {
       console.error("Error fetching user data:", fetchError);
@@ -138,23 +130,26 @@ function Settings() {
       return;
     }
 
-    if (user.password !== oldPassword) {
-      alert("Old password is incorrect.");
-      return;
-    }
+    console.log(oldPassword);
+    console.log(newPassword);
+    console.log(confirmPassword);
 
     if (newPassword && newPassword !== confirmPassword) {
+      console.error("passwords do not match");
       alert("New password and confirm password do not match.");
       return;
     }
 
-    const updates = {
-      password: newPassword,
-    };
+    const match = await bcrypt.compare(oldPassword, user.password_hash);
+    if (!match) {
+      alert("Old password is incorrect.");
+      return;
+    }    
 
+    const newHashedPassword = await bcrypt.hash(newPassword, 10);
     const { data, error } = await supabase
       .from("users")
-      .update(updates)
+      .update({ password_hash: newHashedPassword })
       .eq("id", user_id);
 
     if (error) {
@@ -252,7 +247,7 @@ function Settings() {
               id="old_password"
               name="old_password"
               value={oldPassword}
-              onChange={handleOldPasswordChange}
+              onChange={(e) => setOldPassword(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -262,7 +257,7 @@ function Settings() {
               id="new_password"
               name="new_password"
               value={newPassword}
-              onChange={handlePasswordChange}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -272,7 +267,7 @@ function Settings() {
               id="confirm_password"
               name="confirm_password"
               value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
           <button type="submit">Change Password</button>
