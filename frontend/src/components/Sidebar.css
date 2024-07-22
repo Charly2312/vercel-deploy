@@ -9,7 +9,7 @@
   position: fixed; /* Fixes the sidebar to the left of the viewport */
   top: 0; /* Positions the sidebar at the top */
   left: 0; /* Positions the sidebar at the left */
-  overflow-y: auto; /* Adds vertical scrolling if content overflows */
+  overflow-y: hidden; /* Adds vertical scrolling if content overflows */
 }
 
 .sidebar-header {
@@ -28,6 +28,7 @@
 .sidebar-title h2 {
   font-size: 26px; /* Sets the font size for the title */
   margin-bottom: 5px; /* Adds space below the title */
+  color: white; /* Sets the text color inside the sidebar */
 }
 
 .sidebar-title p {

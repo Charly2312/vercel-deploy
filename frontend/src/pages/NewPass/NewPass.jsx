@@ -36,12 +36,9 @@ const NewPass = () => {
     if (!userData) {
       alert("No user found with this email.");
     }
-    
+
     // If user is found, update the password
     const hashedPassword = await bcrypt.hash(info.password_hash, 10);
-    const { data, error } = await supabase.auth.updateUser({
-      password: hashedPassword
-    })
     const { error: updateError } = await supabase
       .from("users")
       .update({ password_hash: hashedPassword })

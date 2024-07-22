@@ -1,27 +1,63 @@
-/* DailyReminder.css */
 .daily-reminder-box {
-  background-color: #f0f0f0;
-  padding: 2vw; /* Relative padding */
+  background-color: #ffffff;
+  border: 1px solid #e4d1b9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 150vw; /* Relative width */
-  height: 15vh; /* Relative height */
-  overflow: hidden; /* Hide overflow text */
+  padding: 15px;
+  margin: 20px auto;
+  min-width: 70vw;
+  max-width: 1100px;
+  width: 100%;
+  height: 200px; /* Fixed height */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto; /* Center the box horizontally */
+  font-family: 'YourFontName', sans-serif; /* Use the same font as your homepage */
+  color: #333;
+  text-align: center;
+  overflow: hidden;
 }
 
-.daily-reminder-box h2 {
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.header-container h2 {
+  font-size: 26px;
   margin: 0;
-  font-size: 1.5em;
-  text-align: center;
+  color: #000;
+}
+
+.header-container .message {
+  color: #71584f;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.daily-reminder-box .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .daily-reminder-box p {
-  font-size: 1em;
-  text-align: center;
-  margin: 10px 0 0;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.daily-reminder-box .quote {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.daily-reminder-box .author {
+  font-weight: bold;
+  color: #555;
 }

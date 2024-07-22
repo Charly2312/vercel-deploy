@@ -1,71 +1,70 @@
 .settings-page {
-    display: flex;
-    overflow: hidden;
-  }
-  
-  .settings-container {
-    background-color: #faf3dd; /* Light Beige */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 800px;
-    margin: 20px auto;
-    flex-grow: 1;
-    margin-left: 250px;
-    overflow: auto;
-    height: 95vh;
-  }
-  
-  .settings-container h2 {
-    color: #2e2d2d; /* Dark Slate */
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 14px;
-    color: #2e2d2d; /* Dark Slate */
-    margin-bottom: 5px;
-  }
-  
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="password"],
-  .form-group input[type="file"],
-  .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #e4d1b9; /* Warm Sand */
-    border-radius: 5px;
-    background-color: #f7f3e8; /* Off-White */
-  }
-  
-  .form-group input[type="email"]:disabled {
-    background-color: #e0e0e0; /* Disabled input background */
-  }
-  
-  .profile-picture {
-    display: block;
-    margin-top: 10px;
-    max-width: 150px;
-    border-radius: 50%;
-  }
-  
-  button {
-    background-color: #f28482; /* Soft Coral */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #e57373; /* Slightly darker coral */
-  }
-  
+  display: flex;
+  overflow: hidden;
+}
+
+.settings-container {
+  background-color: #fdfaf6; /* Light Beige */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 800px;
+  margin: 20px auto;
+  flex-grow: 1;
+  margin-left: 250px;
+  overflow: auto;
+  height: 95vh;
+}
+
+.settings-container h2 {
+  color: #2e2d2d; /* Dark Slate */
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #2e2d2d; /* Dark Slate */
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e4d1b9; /* Warm Sand */
+  border-radius: 5px;
+  background-color: #fcf9f1; /* Off-White */
+}
+
+.form-group input[type="email"]:disabled {
+  background-color: #e0e0e0; /* Disabled input background */
+}
+
+.profile-picture {
+  display: block;
+  margin-top: 10px;
+  max-width: 150px;
+  border-radius: 50%;
+}
+
+button {
+  background-color: #f28482; /* Soft Coral */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e57373; /* Slightly darker coral */
+}

@@ -1,25 +1,37 @@
-// DailyReminder.js
 import { useCallback, useState, useEffect } from "react";
 import "./DailyReminder.css";
 
 export default function DailyReminder() {
   const [quote, setQuote] = useState("Loading...");
+  const categories = ["attitude", "dreams", "education", "experience", "failure", "happiness", "hope", "inspirational", "intelligence", "knowledge", "leadership", "learning", "life", "success"];
 
   const fetchQuote = useCallback(() => {
-    const url = "https://type.fit/api/quotes";
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+    const url = `https://api.api-ninjas.com/v1/quotes?category=${randomCategory}`;
+    const apiKey = "kThfHLjem77f3bYXul9irg==7Uqyldt3I71IMhMy"; // Replace with your API key
 
-    fetch(url)
-      .then((res) => res.json())
+    fetch(url, {
+      headers: {
+        'X-Api-Key': apiKey,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
       .then((data) => {
-        // Since this API returns an array of quotes, randomly select one
-        const randomQuote = data[Math.floor(Math.random() * data.length)];
-        if (randomQuote.text && randomQuote.author) {
-          setQuote(`${randomQuote.text} - ${randomQuote.author}`);
+        if (data && data.length > 0 && data[0].quote && data[0].author) {
+          setQuote(`${data[0].quote} - ${data[0].author}`);
         } else {
           throw new Error("No quote data available");
         }
       })
-      .catch(() => setQuote("Failed to load the quote!"));
+      .catch((error) => {
+        console.error("Failed to fetch quote:", error);
+        setQuote("Failed to load the quote!");
+      });
   }, []);
 
   useEffect(() => {
@@ -28,8 +40,14 @@ export default function DailyReminder() {
 
   return (
     <div className="daily-reminder-box">
-      <h2>Daily Reminder</h2>
-      <p>{quote}</p>
+      <div className="header-container">
+        <h2>Daily Quote For You!</h2>
+        <span className="message">Have a great day!</span>
+      </div>
+      <div className="content">
+        <p className="quote">"{quote.split(" - ")[0]}"</p>
+        <p className="author">- {quote.split(" - ")[1]}</p>
+      </div>
     </div>
   );
 }

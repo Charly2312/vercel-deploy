@@ -37,7 +37,27 @@ header h1 {
   color: #333;
 }
 
-.link-buttons button {
+.completed-tasks-button {
+  background-color: #8aaf93;
+  color: white;
+  border: none;
+  padding: 5px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.completed-tasks-button:hover {
+  background-color: #b8d8c0;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #000000;
+}
+
+.canvas-button,
+.link-button {
   background-color: #fff;
   color: black;
   border: none;
@@ -47,7 +67,8 @@ header h1 {
   cursor: pointer;
 }
 
-.link-buttons button:hover {
+.canvas-button:hover,
+.link-button:hover {
   background-color: #ccc;
 }
 
@@ -148,6 +169,9 @@ header h1 {
 }
 
 /* Modal */
+/* Modal styling */
+/* Modal styling */
+/* Modal styling */
 .modal {
   position: fixed;
   top: 0;
@@ -168,20 +192,32 @@ header h1 {
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
+  position: relative;
 }
 
 .modal-content h2 {
   margin-bottom: 20px;
 }
 
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
 .modal-content input,
 .modal-content textarea,
 .modal-content select {
-  width: calc(100% - 20px);
+  width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 5px 0 15px;
   border-radius: 5px;
   border: 1px solid #ddd;
+}
+
+.modal-content textarea {
+  resize: vertical;
 }
 
 .modal-content button {
@@ -197,28 +233,28 @@ header h1 {
   background-color: #a6c1b5;
 }
 
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
 /* Footer */
 footer {
   margin-top: 20px;
-}
-
-.completed-tasks-button {
-  background-color: #8aaf93;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.completed-tasks-button:hover {
-  background-color: #b8d8c0;
-}
-
-.completed {
-  text-decoration: line-through;
-  color: #000000;
 }
 
 /* Task Details */
