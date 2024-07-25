@@ -100,6 +100,7 @@ function Settings() {
       first_name: userData.first_name,
       last_name: userData.last_name,
       bio: userData.bio,
+      token: userData.token,
     };
 
     const { data, error } = await supabase
