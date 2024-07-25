@@ -11,6 +11,7 @@ function Settings() {
   const [userData, setUserData] = useState({
     username: "",
     email: "",
+    token:"",
     pfp: "",
     first_name: "",
     last_name: "",
@@ -184,6 +185,16 @@ function Settings() {
               name="email"
               value={userData.email}
               disabled
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="canvas token">Canvas token</label>
+            <input
+              type="text"
+              id="token"
+              name="token"
+              value={userData.token}
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
