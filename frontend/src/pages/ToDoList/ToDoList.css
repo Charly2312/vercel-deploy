@@ -221,6 +221,8 @@ header h1 {
 }
 
 .modal-content button {
+  position: relative;
+  margin-left: 25px;
   background-color: #88c0a6;
   color: white;
   border: none;

@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import NewPass from "./pages/NewPass/NewPass";
 import Notifications from "./pages/Notifications/Notifications";
+import Help from "./pages/Help"; // Add this line
 import { AuthProvider } from "./context/AuthContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -79,6 +80,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Notifications />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/help"
+              element={
+                <ProtectedRoute>
+                  <Help />
                 </ProtectedRoute>
               }
             />

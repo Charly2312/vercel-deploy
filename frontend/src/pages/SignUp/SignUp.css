@@ -1,50 +1,49 @@
-/* src/pages/SignUp.css */
 body,
 html {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(
-    to top,
-    #f2f2f2 0%,
-    #f2f2f2 50%,
-    #ffffff 50%,
-    #ffffff 100%
-  );
+  background: linear-gradient(135deg, #f9f2e8 0%, #fdfaf6 100%);
 }
 
 .signup-container {
   width: 90%;
-  max-width: 320px;
+  max-width: 360px;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-h2,
+h2 {
+  color: #4a4a4a;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
 p {
-  margin: 0 0 20px 0;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 .social-button {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
   color: white;
   cursor: pointer;
-  position: relative;
+  transition: all 0.3s ease;
 }
 
 .social-button img {
@@ -53,72 +52,79 @@ p {
   margin-right: 12px;
 }
 
-.google {
-  background-color: #db4437;
-}
-.facebook {
-  background-color: #3b5998;
-}
-.apple {
-  background-color: #a2aaad;
-}
+.google { background-color: #db4437; }
+.facebook { background-color: #3b5998; }
+.apple { background-color: #000; }
 
-.social-button.google img {
-  margin-top: -1px;
-  margin-right: 14px;
-}
-.social-button.facebook img {
-  margin-top: -1px;
-  margin-right: 12px;
-  margin-left: -9px;
-}
-.social-button.apple img {
-  margin-top: -2px;
-  margin-right: 10px;
-  margin-left: 2px;
-}
-
-.social-button span {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.social-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .divider {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: #ccc;
-  font-size: 12px;
+  margin: 20px 0;
+  color: #888;
+  font-size: 14px;
+  position: relative;
 }
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
 
 .signup-form input[type="text"],
 .signup-form input[type="email"],
 .signup-form input[type="password"],
 .signup-form input[type="date"] {
-  width: 90%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.signup-form input:focus {
+  border-color: #88c0a6;
+  outline: none;
 }
 
 .signup-form button {
-  width: 90%;
-  padding: 10px;
-  background-color: #007bff;
+  width: 100%;
+  padding: 12px;
+  background-color: #88c0a6;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
 .signup-form button:hover {
-  background-color: #0056b3;
+  background-color: #6b9b84;
 }
 
 .ady {
-  font-size: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.ady a {
+  color: #88c0a6;
+  text-decoration: none;
+}
+
+.ady a:hover {
+  text-decoration: underline;
 }

@@ -11,7 +11,6 @@ function Settings() {
   const [userData, setUserData] = useState({
     username: "",
     email: "",
-    token:"",
     pfp: "",
     first_name: "",
     last_name: "",
@@ -189,16 +188,6 @@ function Settings() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="canvas token">Canvas token</label>
-            <input
-              type="text"
-              id="token"
-              name="token"
-              value={userData.token}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="form-group">
             <label htmlFor="first_name">First Name</label>
             <input
               type="text"
@@ -217,15 +206,6 @@ function Settings() {
               value={userData.last_name}
               onChange={handleInputChange}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="bio">Bio</label>
-            <textarea
-              id="bio"
-              name="bio"
-              value={userData.bio}
-              onChange={handleInputChange}
-            ></textarea>
           </div>
           <div className="form-group">
             <label htmlFor="pfp">Profile Picture</label>

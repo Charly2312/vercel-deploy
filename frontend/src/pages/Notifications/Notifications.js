@@ -12,7 +12,7 @@ const NotificationPage = () => {
   }, []);
 
   const fetchNotifications = async () => {
-    const { data, error } = await supabase.from('notifications').select('*');
+    const { data, error } = await supabase.from('notifications').select('*').order('created_at', { ascending: false });
     if (error) {
       console.error('Error fetching notifications:', error);
     } else {
@@ -46,12 +46,27 @@ const NotificationPage = () => {
     <div className="notifications-page">
       <Sidebar />
       <div className="notifications-content">
-        <div className="notification-filter">
-          <button onClick={() => setFilter('all')}>All</button>
-          <button onClick={() => setFilter('read')}>Read</button>
-          <button onClick={() => setFilter('unread')}>Unread</button>
-        </div>
         <h2>Your Notifications</h2>
+        <div className="notification-filter">
+          <button 
+            onClick={() => setFilter('all')} 
+            className={filter === 'all' ? 'active' : ''}
+          >
+            All
+          </button>
+          <button 
+            onClick={() => setFilter('read')} 
+            className={filter === 'read' ? 'active' : ''}
+          >
+            Read
+          </button>
+          <button 
+            onClick={() => setFilter('unread')} 
+            className={filter === 'unread' ? 'active' : ''}
+          >
+            Unread
+          </button>
+        </div>
         {filteredNotifications.length > 0 ? (
           <ul className="notifications-list">
             {filteredNotifications.map(notification => (
