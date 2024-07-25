@@ -7,9 +7,15 @@ const ForgotPassword = () => {
   
   const handleResetPassword = async (event) => {
     event.preventDefault();
-    axios.post("https://vercel-prototype-server.vercel.app/send-reset-email", {email})
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
+    axios.post("https://vercel-deploy-frontend-tau.vercel.app/send-reset-email", {email})
+    .then(result => {
+      console.log(result);
+      alert("Email sent successfully!");
+    })
+    .catch(err => {
+      console.log(err);
+      alert("There was an error sending the email");
+    })
   }
 
   return (
