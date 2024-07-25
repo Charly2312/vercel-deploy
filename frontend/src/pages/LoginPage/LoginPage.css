@@ -75,8 +75,10 @@ input[type="password"],
 button {
   width: calc(100% - 3px); /* Adjust width to account for padding */
   padding: 10px;
+  border: 1px solid #ddd;
   margin: 0; /* Removing any default margin */
   box-sizing: border-box; /* Include padding and border in the element's total width */
+  transition: border-color 0.3s ease;
 }
 
 input[type="text"],
@@ -86,8 +88,14 @@ input[type="password"] {
   background: transparent;
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #88c0a6;
+  outline: none;
+}
+
 button {
-  background-color: #b8997c;
+  background-color: #88c0a6;
   color: white;
   border: none;
   border-radius: 5px;
@@ -95,7 +103,7 @@ button {
 }
 
 button:hover {
-  background-color: rgba(96, 79, 35, 0.958);
+  background-color: #6b9b84;
 }
 
 .options {

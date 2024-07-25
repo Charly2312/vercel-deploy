@@ -1,36 +1,52 @@
+/* Settings.css */
 .settings-page {
   display: flex;
   overflow: hidden;
+  background-color: #fdfaf6; /* Light beige background to match the main content area */
+  min-height: 100vh;
 }
 
 .settings-container {
-  background-color: #fdfaf6; /* Light Beige */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  width: 800px;
-  margin: 20px auto;
-  flex-grow: 1;
-  margin-left: 250px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 900px;
+  margin: 30px auto;
+  margin-left: 450px;
+  margin-right: 200px;
   overflow: auto;
-  height: 95vh;
+  height: calc(100vh - 60px);
 }
 
 .settings-container h2 {
-  color: #2e2d2d; /* Dark Slate */
-  margin-bottom: 20px;
+  color: #123c69; /* Dark blue to match the accent color */
+  margin-bottom: 30px;
+  font-size: 32px;
+  border-bottom: 3px solid #123c69;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.settings-container h3 {
+  color: #123c69;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  font-size: 24px;
+  text-align: center;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .form-group label {
   display: block;
-  font-size: 14px;
-  color: #2e2d2d; /* Dark Slate */
-  margin-bottom: 5px;
+  font-size: 18px;
+  color: #2e2d2d;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .form-group input[type="text"],
@@ -39,32 +55,115 @@
 .form-group input[type="file"],
 .form-group textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #e4d1b9; /* Warm Sand */
-  border-radius: 5px;
-  background-color: #fcf9f1; /* Off-White */
+  padding: 14px;
+  border: 2px solid #a2b9bc;
+  border-radius: 8px;
+  background-color: #fcf9f1;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="file"]:focus,
+.form-group textarea:focus {
+  border-color: #123c69;
+  box-shadow: 0 0 0 3px rgba(18, 60, 105, 0.2);
+  outline: none;
 }
 
 .form-group input[type="email"]:disabled {
-  background-color: #e0e0e0; /* Disabled input background */
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .profile-picture {
   display: block;
-  margin-top: 10px;
-  max-width: 150px;
+  margin: 20px auto;
+  max-width: 180px;
   border-radius: 50%;
+  border: 4px solid #123c69;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button {
-  background-color: #f28482; /* Soft Coral */
+  background-color: #123c69;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 14px 28px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 30px auto 0;
+  width: 100%;
+  max-width: 300px;
 }
 
 button:hover {
-  background-color: #e57373; /* Slightly darker coral */
+  background-color: #0e2f52;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form + form {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 2px solid #a2b9bc;
+}
+
+input[type="file"] {
+  border: 2px solid #a2b9bc;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #fcf9f1;
+  width: 100%;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background-color: #123c69;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #0e2f52;
+}
+
+/* Adding some decorative elements */
+.settings-container::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .settings-container {
+    margin-left: 300px;
+    margin-right: 50px;
+    width: calc(100% - 350px);
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    margin: 20px;
+    width: calc(100% - 40px);
+    padding: 30px;
+  }
 }

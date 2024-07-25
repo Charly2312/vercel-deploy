@@ -5,7 +5,7 @@
   background-color: #fdfaf6;
   padding: 20px;
   height: 100vh;
-  width: 100vw;
+  width: calc(100vw - 250px);
   margin-left: 250px;
 }
 
@@ -27,15 +27,17 @@
 
 .notification-filter button {
   background-color: #88c0a6;
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   margin: 0 5px;
+  transition: background-color 0.3s;
 }
 
-.notification-filter button:hover {
+.notification-filter button:hover,
+.notification-filter button.active {
   background-color: #6b9b84;
 }
 
@@ -47,7 +49,7 @@
 
 .notification-item {
   padding: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #e2d9c9;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -56,11 +58,11 @@
 }
 
 .notification-item.unread {
-  background-color: #ffefef;
+  background-color: #fff9f0;
 }
 
 .notification-item.read {
-  background-color: #efffef;
+  background-color: #fdfaf6;
 }
 
 .notification-actions button {
@@ -68,8 +70,15 @@
   border: none;
   color: #88c0a6;
   cursor: pointer;
+  margin-left: 10px;
+  transition: color 0.3s;
 }
 
 .notification-actions button:hover {
-  text-decoration: underline;
+  color: #6b9b84;
+}
+
+h2 {
+  color: #4a4a4a;
+  margin-bottom: 20px;
 }

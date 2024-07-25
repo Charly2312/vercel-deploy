@@ -168,6 +168,7 @@ function Calendar() {
   const handleModalClose = () => {
     setModalVisible(false);
     resetEventDetails();
+    setIsEditing(false);  // Add this line
   };
 
   return (
@@ -221,15 +222,15 @@ function Calendar() {
                   placeholder="Event Title"
                 />
                 <div className="all-day-checkbox">
-                  <label htmlFor="allDayCheckbox">All Day</label>
-                  <input
-                    id="allDayCheckbox"
-                    type="checkbox"
-                    checked={eventDetails.allDay}
-                    onChange={(e) =>
-                      setEventDetails({ ...eventDetails, allDay: e.target.checked })
-                    }
-                  />
+                  <div className="checkbox-container">
+                    <input
+                      id="allDayCheckbox"
+                      type="checkbox"
+                      checked={eventDetails.allDay}
+                      onChange={(e) => setEventDetails({ ...eventDetails, allDay: e.target.checked })}
+                    />
+                    <label htmlFor="allDayCheckbox">All Day</label>
+                  </div>
                 </div>
                 <input
                   type="datetime-local"
