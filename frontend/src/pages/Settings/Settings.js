@@ -9,7 +9,6 @@ function Settings() {
   const { user } = useAuth();
   const user_id = user ? user.id : null; // Use the actual user ID from AuthContext
   const [userData, setUserData] = useState({
-    //not linking to canvas
     username: "",
     email: "",
     pfp: "",
