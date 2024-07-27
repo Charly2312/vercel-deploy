@@ -53,12 +53,6 @@ app.post('/send-reset-email', async (req, res) => {
     console.error('Error requesting password reset:', error);
     return res.status(500).json({ message: "Failed to send reset email", details: error.message });
   } else {
-    /*resend.emails.send({
-      from: 'onboarding@resend.dev',
-      //from:'ontrack@support.com',
-      to: email,
-      subject: 'Reset password link',
-      html: '<p>Press the link to reset your password: <link>https://vercel-deploy-frontend-tau.vercel.app/newpassword</link>!</p>'*/
     const sentFrom = new Sender("ontrack@trial-yzkq340req04d796.mlsender.net", "ontrack");
 
     const recipients = [
